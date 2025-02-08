@@ -1,0 +1,49 @@
+{
+  "hash": "11e179aa",
+  "configHash": "4f190c1f",
+  "lockfileHash": "f4d6ef0a",
+  "browserHash": "59e49a31",
+  "optimized": {
+    "bootstrap/dist/js/bootstrap.bundle.min.js": {
+      "src": "../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "file": "bootstrap_dist_js_bootstrap__bundle__min__js.js",
+      "fileHash": "4ef68fe4",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "54875046",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "dcbb597e",
+      "needsInterop": true
+    },
+    "react-bootstrap": {
+      "src": "../../node_modules/react-bootstrap/esm/index.js",
+      "file": "react-bootstrap.js",
+      "fileHash": "782788a7",
+      "needsInterop": false
+    },
+    "react-leaflet": {
+      "src": "../../node_modules/react-leaflet/lib/index.js",
+      "file": "react-leaflet.js",
+      "fileHash": "0dc4456b",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-DNLHEKFE": {
+      "file": "chunk-DNLHEKFE.js"
+    },
+    "chunk-NVAVHLZZ": {
+      "file": "chunk-NVAVHLZZ.js"
+    },
+    "chunk-5WRI5ZAA": {
+      "file": "chunk-5WRI5ZAA.js"
+    }
+  }
+}

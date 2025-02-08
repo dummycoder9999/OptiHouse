@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
-import Loading from './Loading';
-import AnimatedText from './AnimatedText';
-import MapPicker from './MapPicker';
-import CustomModalForm from './CustomModalForm';
-import Footer from './Footer';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import ChatBot from './ChatBot';
+import React, { useState, useEffect } from "react";
+import Navbar from "./Navbar";
+import Loading from "./Loading";
+import AnimatedText from "./AnimatedText";
+import MapPicker from "./MapPicker";
+import CustomModalForm from "./CustomModalForm";
+import Footer from "./Footer";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import ChatBot from "./ChatBot";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [location, setLocation] = useState(null);
   const [step, setStep] = useState(0);
-  const [numPeople, setNumPeople] = useState('');
-  const [houseSize, setHouseSize] = useState('');
+  const [numPeople, setNumPeople] = useState("");
+  const [houseSize, setHouseSize] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [modalTitle, setModalTitle] = useState('');
-  const [inputType, setInputType] = useState('text');
-  const [inputClassName, setInputClassName] = useState('form-control');
+  const [modalTitle, setModalTitle] = useState("");
+  const [inputType, setInputType] = useState("text");
+  const [inputClassName, setInputClassName] = useState("form-control");
   const [onSubmit, setOnSubmit] = useState(() => {});
 
   useEffect(() => {
@@ -30,25 +30,43 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const name = "Socrates";
+        const age = 21;
+        const responce = await fetch(
+          `http://127.0.0.1:8000/api/message?name=${name}&age=${age}`
+        );
+        const data = await responce.json();
+        alert(`Api data: ${data.message}`);
+      } catch (error) {
+        alert("Failed to fetch data");
+      }
+    }
+
+    fetchData();
+  }, []);
+
   const handleTextComplete = () => {
-   // nothing needed
+    // nothing needed
   };
 
   const handleLocationSelect = (location) => {
     setLocation(location);
-    console.log('Selected location:', location);
+    console.log("Selected location:", location);
     setStep(step + 1);
   };
 
   const handleNumPeopleSubmit = (value) => {
     setNumPeople(value);
-    console.log('Number of people:', value);
+    console.log("Number of people:", value);
     setStep(step + 1);
   };
 
   const handleHouseSizeSubmit = (value) => {
     setHouseSize(value);
-    console.log('House size:', value);
+    console.log("House size:", value);
     setStep(step + 1);
   };
 
@@ -71,30 +89,48 @@ function App() {
       {!isLoading && (
         <div className="content">
           <div className="upper">
-            {step == 0 && <AnimatedText
-              text="Welcome to OptiHouse!<br>Let's find the perfect way to create your home.<br>First, where would you like it to be located?"
-              onComplete={handleTextComplete}
-              className="line1"
-            />}
-            {step == 1 && <AnimatedText
-              text="How many people will live in this house?"
-              onComplete={handleTextComplete}
-              className="line2"
-            />}
-            {step == 2 && <AnimatedText
-              text="What will the total size of the house be in square meters?"
-              onComplete={handleTextComplete}
-              className="line2"
-            />}
+            {step == 0 && (
+              <AnimatedText
+                text="Welcome to OptiHouse!<br>Let's find the perfect way to create your home.<br>First, where would you like it to be located?"
+                onComplete={handleTextComplete}
+                className="line1"
+              />
+            )}
+            {step == 1 && (
+              <AnimatedText
+                text="How many people will live in this house?"
+                onComplete={handleTextComplete}
+                className="line2"
+              />
+            )}
+            {step == 2 && (
+              <AnimatedText
+                text="What will the total size of the house be in square meters?"
+                onComplete={handleTextComplete}
+                className="line2"
+              />
+            )}
           </div>
           <div className="lower">
-            {step == 0 && <MapPicker onLocationSelect={handleLocationSelect} className="earth-icon" />}
+            {step == 0 && (
+              <MapPicker
+                onLocationSelect={handleLocationSelect}
+                className="earth-icon"
+              />
+            )}
             {step == 1 && (
               <div className="num-people">
                 <img
                   src="ancestors.png"
                   alt="Enter Number of People"
-                  onClick={() => handleShowModal('Number of People', 'number', 'form-control', handleNumPeopleSubmit)}
+                  onClick={() =>
+                    handleShowModal(
+                      "Number of People",
+                      "number",
+                      "form-control",
+                      handleNumPeopleSubmit
+                    )
+                  }
                   className="people-icon.png"
                 />
               </div>
@@ -104,7 +140,14 @@ function App() {
                 <img
                   src="house_measure.png"
                   alt="Enter House Size"
-                  onClick={() => handleShowModal('House Size (sqm)', 'number', 'form-control', handleHouseSizeSubmit)}
+                  onClick={() =>
+                    handleShowModal(
+                      "House Size (sqm)",
+                      "number",
+                      "form-control",
+                      handleHouseSizeSubmit
+                    )
+                  }
                   className="size-icon"
                 />
               </div>
